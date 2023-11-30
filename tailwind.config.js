@@ -6,7 +6,18 @@ export default {
   ],
   mode: 'jit',
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        light: {
+          text: 'black',
+          background: 'white',
+        },
+        dark: {
+          text: 'white',
+          background: 'black',
+        },
+      }
+    },
     fontFamily:{
       taruno: [
         'Taruno Wide', "sans-serif",
@@ -18,7 +29,7 @@ export default {
 
     colors: {
       'black': "rgba(8, 7, 8, 1)",
-      'black': "rgba(8, 7, 8, 0.6)",
+      'tr-black': "rgba(8, 7, 8, 0.6)",
       'white': "rgba(242, 242, 242, 1)",
       'tr-white': "rgba(242, 242, 242, 0.3)",
       'dk-white': "rgba(200, 194, 194, 0)",
