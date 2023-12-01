@@ -6,7 +6,7 @@ export default function Background() {
         xmlns="http://www.w3.org/2000/svg"
         version="1.1"
         xmlnsXlink="http://www.w3.org/1999/xlink"
-        xmlns:svgjs="http://svgjs.dev/svgjs"
+        xlinkHref="http://svgjs.dev/svgjs"
         viewBox="0 0 800 450"
         opacity="0.26"
         className="w-full h-full"

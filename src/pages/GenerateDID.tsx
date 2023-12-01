@@ -60,7 +60,7 @@ export default function GenerateDID() {
                             type='button'
                             ariaLabel='copy code'
                             onClick={copyCode}
-                            className='p-0'
+                            className='!p-0'
                         >
                             <Icon icon="iconoir:copy" />
                         </ToggleButton>
@@ -80,7 +80,7 @@ export default function GenerateDID() {
                     type='button'
                     title='GENERATE'
                     ariaLabel='generate DID'
-                    className={`relative font-taruno rounded-lg ${theme === 'dark' ? 'bg-pink text-white' : 'bg-aqua'} before:absolute before:top-2 before:left-2 before:bg-gold`}
+                    className={`relative font-taruno rounded-lg ${theme === 'dark' ? 'bg-pink text-white' : 'bg-aqua'}`}
                     onClick={getCode}
                 />
             )}
