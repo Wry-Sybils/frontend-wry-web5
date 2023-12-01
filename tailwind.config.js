@@ -37,7 +37,7 @@ export default {
       'pink': "rgba(246, 16, 103, 1)",
       'gold': "rgba(255, 215, 0, 1)",
       'gray': "rgba(43, 41, 43, 1)",
-      'tr-gray': "rgba(43, 41, 43, 0.8)",
+      'tr-gray': "rgba(43, 41, 43, 0.6)",
     }
   },
   darkMode: "class",

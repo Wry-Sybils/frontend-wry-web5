@@ -38,8 +38,6 @@ export default function GenerateDID() {
             });
         }
     }
-    
-    console.log('url', url)
 
     return(
         <Content className={`h-screen w-screen flex flex-col items-center justify-center`}>
@@ -70,7 +68,9 @@ export default function GenerateDID() {
                         type='button'
                         ariaLabel='Login Button'
                         onClick={() => navigate('/login')}
-                        className={`fixed bottom-6 right-6 rounded-full ${theme === 'dark' ? 'bg-pink text-white' : 'bg-aqua text-white'}`}
+                        className='fixed bottom-6 right-6 rounded-full'
+                        addDark='bg-pink text-white'
+                        addLight='bg-aqua text-white'
                     >
                         <Icon icon="ant-design:login-outlined" className='text-4xl' />
                     </ToggleButton>
@@ -80,7 +80,9 @@ export default function GenerateDID() {
                     type='button'
                     title='GENERATE'
                     ariaLabel='generate DID'
-                    className={`relative font-taruno rounded-lg ${theme === 'dark' ? 'bg-pink text-white' : 'bg-aqua'}`}
+                    className= 'relative font-taruno rounded-lg'
+                    addDark='bg-pink text-white'
+                    addLight='bg-aqua'
                     onClick={getCode}
                 />
             )}
