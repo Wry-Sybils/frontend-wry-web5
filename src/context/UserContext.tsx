@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 
-type userTypes = {
+export type userTypes = {
     username: string | undefined;
     DID: string;
     photo: string | undefined;

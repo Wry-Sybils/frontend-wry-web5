@@ -32,7 +32,7 @@ export default {
       'tr-black': "rgba(8, 7, 8, 0.6)",
       'white': "rgba(242, 242, 242, 1)",
       'tr-white': "rgba(242, 242, 242, 0.3)",
-      'dk-white': "rgba(200, 194, 194, 0)",
+      'dk-white': "rgba(200, 194, 194, 1)",
       'aqua': "rgba(0, 240, 181, 1)",
       'pink': "rgba(246, 16, 103, 1)",
       'gold': "rgba(255, 215, 0, 1)",

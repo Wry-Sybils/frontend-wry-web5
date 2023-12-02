@@ -1,5 +1,6 @@
 import { ChangeEvent, useState } from 'react';
 import { Icon } from '@iconify/react';
+import { useTheme } from '../context/ThemeContext';
 
 type FormInputTypes = {
   type: string
@@ -15,11 +16,14 @@ type FormInputTypes = {
   children?: React.ReactNode
   message?: string
   disabled?: boolean
+  disabledClassLight?: string
+  disabledClassDark?: string
   inputClass?: string
   ariaLabel: string
 }
 
 export default function FormInput(props: FormInputTypes) {
+  const { theme } = useTheme();
   const [formState, setFormState] = useState({
     [props.id]: ""
   });
@@ -43,7 +47,10 @@ export default function FormInput(props: FormInputTypes) {
   
   return (
     <span id='form-input' className={`relative w-full flex flex-col items-start gap-1 bg-transparent rounded-small ${props.className}`}>
-      <label htmlFor={props.id} className={`relative text-base text-sac-black ${formState[props.id] ? 'active' : ''} font-['Inter var']`}>
+      <label htmlFor={props.id} className={`relative text-2xl text-sac-black 
+        ${formState[props.id] ? 'active' : ''} font-['Inter var']
+        ${theme === 'dark' ? 'text-white' : 'text-black'}
+      `}>
         {props.title}
       </label>
 
@@ -62,7 +69,11 @@ export default function FormInput(props: FormInputTypes) {
         title={props.message}
         required
         placeholder={props.placeholder}
-        className={`relative w-full h-10 bg-transparent outline-none resize-none border border-sac-black rounded py-1 px-1 overflow-hidden text-sac-black focus-within:border-sac-maroon placeholder:text-sac-blue font-['Inter var'] ${props.inputClass}`}
+        className={`relative w-full h-10 bg-transparent outline-none resize-none border rounded py-1 px-4 overflow-hidden text-black font-gilroy 
+          ${theme === 'dark' ? 'focus-within:border-pink border-dk-white bg-tr-gray text-white' : 'focus-within:border-aqua border-gray bg-tr-white text-gray'}
+          ${props.inputClass}
+          ${props.disabled && theme === 'dark' ? props.disabledClassDark : props.disabledClassLight}`
+        }
         disabled={props.disabled}
         aria-label={props.ariaLabel}
         aria-labelledby={props.ariaLabel}
