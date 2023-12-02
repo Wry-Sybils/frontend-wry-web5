@@ -1,9 +1,16 @@
-import { Icon } from "@iconify/react";
-import { useTheme } from "../context/ThemeContext";
+import { useTheme } from '../context/ThemeContext';
+import { Icon } from '@iconify/react';
+import { useUser } from '../context/UserContext';
+import { useState, useEffect, ChangeEvent } from 'react';
 
+type Props = {
+    className?: string;
+}
 
-export default function ProfilePhoto() {
-    const {theme} = useTheme();
+export default function ProfilePhoto(props:Props) {
+    const { user, setUser } = useUser();
+    const { theme } = useTheme();
+    const [randomImage, setRandomImage] = useState('');
 
     const images = [
         "https://i.pinimg.com/originals/c6/67/3c/c6673cce74c0f1b7e7a536ac2d8cd562.jpg",
@@ -14,12 +21,62 @@ export default function ProfilePhoto() {
         "https://i.pinimg.com/originals/c9/06/dc/c906dc596966e635b7d1c4d0b2c86135.jpg",
     ]
 
-  return (
-    <div className={`relative h-[5em] w-[5em] rounded-full overflow-hidden ${theme === 'dark' ? '' : ''} `}>
-        <label htmlFor="image" className="bg-tr-gray text-white h-full w-full flex items-center justify-center">
-            <Icon icon="bx:image-add" className="text-[3em]" />
-        </label>
-        <input type="image" src={images.images} alt="" id="image" />
-    </div>
-  )
+    const generateRandomImage = () => {
+        const randomIndex = Math.floor(Math.random() * images.length);
+        return images[randomIndex];
+    }
+
+    useEffect(() => {
+        const storedImage = localStorage.getItem('userImage');
+        if (storedImage && user && user.photo) {
+            setRandomImage(storedImage);
+        } else if (user && !user.photo) {
+            const newImage = generateRandomImage();
+            setUser({
+                ...user,
+                photo: newImage,
+            });
+            localStorage.setItem('userImage', newImage);
+        }
+    }, [user, setUser]);
+
+    const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const selectedImage = e.target.files?.[0];
+        const prevUser = user;
+        if (selectedImage) {
+            const imageUrl = URL.createObjectURL(selectedImage);
+            setRandomImage(imageUrl);
+            setUser(prevUser ? 
+                { ...prevUser, 
+                    photo: imageUrl, 
+                    username: prevUser.username, 
+                    DID: prevUser.DID 
+                } : 
+                { photo: imageUrl, username: undefined, DID: '' 
+            });
+        }
+    }
+
+    return (
+        <div className={`relative h-[5em] w-[5em] rounded-full p-[.1em] overflow-hidden ${theme === 'dark' ? 'bg-pink' : 'bg-aqua'} ${props.className}`}>
+            <label
+                htmlFor="image"
+                className="absolute top-0 left-0 bg-tr-gray text-white h-full w-full rounded-full flex items-center justify-center cursor-pointer opacity-0 transition-opacity duration-300 ease-in-out hover:opacity-100 hover:z-50"
+            >
+                <Icon icon="bx:image-add" className="text-[3em]" />
+                <input
+                    type="file"
+                    id="image"
+                    accept="image/*"
+                    onChange={handleImageChange}
+                    style={{ display: 'none' }}
+                />
+            </label>
+            <img
+                src={randomImage || user?.photo || generateRandomImage()}
+                alt={`${user?.username} profile picture`}
+                className='relative h-full w-full rounded-full'
+            />
+        </div>
+    );
 }

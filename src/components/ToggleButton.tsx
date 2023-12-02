@@ -10,6 +10,7 @@ type Props = {
     setIsActiveClass?: string;
     ariaLabel: string;
     disabled?: boolean;
+    disabledClass?: string;
     addDark?: string;
     addLight?: string;
 }
@@ -25,6 +26,7 @@ export default function ToggleButton(props:Props) {
                 ${props.className}
                 ${props.isActive ? props.setIsActiveClass : ''}
                 ${theme === 'dark' ? props.addDark : props.addLight}
+                ${props.disabled ? props.disabledClass : ''}
                 `
             }
             onClick={props.onClick}

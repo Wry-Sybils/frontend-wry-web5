@@ -9,11 +9,12 @@ export default function Login() {
 
   return (
     <Content className={`h-screen w-screen z-10 ${theme === 'dark' ? '' : ''}`}>
-        <ThemeButton />
-<ProfilePhoto />
-        <form action="">
+      <ThemeButton />
+      <ProfilePhoto />
+      
+      <form action="">
 
-        </form>
+      </form>
     </Content>
   )
 }
