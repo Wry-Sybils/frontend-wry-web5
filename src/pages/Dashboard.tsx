@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import SideNav from "../components/SideNav";
 import Content from "../utils/Content";
@@ -15,18 +16,23 @@ export default function Dashboard() {
     const { user } = useUser();
     const { id } = useParams();
     const navigate = useNavigate();
+    const [expand, setExpand] = useState(false);
 
     const contentRender: { [key: string]: JSX.Element } = {
         apps: <ConnectApp />,
         data: <YourData />,
     };
 
+    const handleExpand = () => {
+        setExpand(!expand)
+    }
+
     return (
         <Content className="flex items-start">
             <ThemeButton className="!top-5 !right-36 lg:!top-5" />
-            <SideNav activeBar={id || 'apps'} setActiveBar={navigate} />
+            <SideNav activeBar={id || 'apps'} setActiveBar={navigate} expand={expand} setExpand={handleExpand} />
 
-            <main role="dashboard display" className={`w-full h-full`}>
+            <main role="dashboard display" className={`w-full h-screen`}>
                 <header className="w-full p-4 flex flex-row-reverse items-center justify-start">
                     <ToggleButton
                         type="button"
@@ -41,6 +47,14 @@ export default function Dashboard() {
                         className={`p-2 mx-2 rounded ${theme === 'dark' ? 'hover:bg-tr-white' : 'hover:bg-tr-black'}`}
                     >
                         <Icon icon="mingcute:notification-fill" className={`text-3xl `} />
+                    </ToggleButton>
+                    <ToggleButton
+                        type="button"
+                        ariaLabel="Expand menu"
+                        onClick={handleExpand}
+                        className="mr-auto text-2xl"
+                    >
+                        {!expand ? <Icon icon="fa6-solid:outdent" /> : <Icon icon="fa6-solid:indent" />}
                     </ToggleButton>
                 </header>
                 <section className={`h-[80%] rounded-lg mt-[3%] mx-10 p-4 z-40 border ${theme === 'dark' ? 'border-pink' : 'border-gray'}`}>
