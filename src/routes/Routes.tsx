@@ -2,6 +2,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import GenerateDID from "../pages/GenerateDID";
 import Login from "../pages/Login";
 import Dashboard from "../pages/Dashboard";
+import ConnectApp from "../components/ConnectApp";
+import YourData from "../components/YourData";
 
 
 export default function RouterContent() {
@@ -25,6 +27,14 @@ export default function RouterContent() {
             children: [
                 {
                     path: '/dashboard/:id',
+                },
+                {
+                    path: '/dashboard/',
+                    element: <ConnectApp />
+                },
+                {
+                    path: '/dashboard/',
+                    element: <YourData />
                 }
             ]
         },

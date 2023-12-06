@@ -44,8 +44,8 @@ export default function SideNav({ activeBar, setActiveBar, expand }: Props) {
             `}
         >
             <header className={`border-b border-b-tr-white py-4 m-4 transition-opacity ${expand ? 'opacity-0' : ''}`}>
-                <h3 className={`text-base text-center  ${theme === 'dark' ? '' : ''}`}>
-                    Hello <span className={theme === 'dark' ? 'text-gold' : 'text-gold'}>{user?.username}</span>
+                <h3 className={`text-[12px] text-center  ${theme === 'dark' ? '' : ''}`}>
+                    Hello <span className={theme === 'dark' ? 'text-gold' : 'text-white text-fill'}>{user?.username}</span>
                 </h3>
             </header>
 
@@ -56,7 +56,7 @@ export default function SideNav({ activeBar, setActiveBar, expand }: Props) {
                         key={index}
                         title={items.title}
                         ariaLabel={items.title}
-                        className="w-full !text-[.8em] gap-4 rounded-lg"
+                        className="w-full !text-[.7em] gap-4 rounded-lg"
                         addDark="hover:bg-pink"
                         addLight="hover:bg-gray hover:text-white"
                         onClick={() => {

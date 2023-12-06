@@ -10,6 +10,7 @@ import ToggleButton from "../components/ToggleButton";
 import { useUser } from "../context/UserContext";
 import { Icon } from "@iconify/react";
 import { useTheme } from "../context/ThemeContext";
+// import UserPanel from "../components/UserPanel";
 
 export default function Dashboard() {
     const { theme } = useTheme();
@@ -60,6 +61,8 @@ export default function Dashboard() {
                 <section className={`h-[80%] rounded-lg mt-[3%] mx-10 p-4 z-40 border ${theme === 'dark' ? 'border-pink' : 'border-gray'}`}>
                     {contentRender[id ?? 'apps'] || <ConnectApp />}
                 </section>
+
+                {/* <UserPanel /> */}
             </main>
         </Content>
     );

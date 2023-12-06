@@ -26,7 +26,7 @@ export default function Login() {
     e.preventDefault();
     console.log(user)
 
-    navigate(`/dashboard/${user?.username} = ${user?.DID}`)
+    navigate(`/dashboard/`)
   }
 
   return (
