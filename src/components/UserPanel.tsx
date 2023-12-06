@@ -25,7 +25,7 @@ export default function UserPanel({active}: Props) {
             title: "SETTINGS",
             icon: "tabler:settings-2",
             to: navigate(`${url}/settings`)
-        }
+        },
     ]
 
   return (
