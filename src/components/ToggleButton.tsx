@@ -22,7 +22,7 @@ export default function ToggleButton(props:Props) {
         <button
             type={props.type}
             className={`
-                p-2 outline-none text-base cursor-pointer focus:border-aqua focus-visible:border-gray focus:border-1 z-10
+                p-2 outline-none text-base flex items-center cursor-pointer focus:border-aqua focus-visible:border-gray focus:border-1 z-10
                 ${props.className}
                 ${props.isActive ? props.setIsActiveClass : ''}
                 ${theme === 'dark' ? props.addDark : props.addLight}
@@ -35,8 +35,8 @@ export default function ToggleButton(props:Props) {
             title={props.ariaLabel}
             disabled={props.disabled}
         >
-            {props.title}
             {props.children}
+            {props.title}
         </button>
     )
 }

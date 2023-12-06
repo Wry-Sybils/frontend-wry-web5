@@ -61,21 +61,21 @@ export default function ProfilePhoto(props:Props) {
         <div className={`relative h-[5em] w-[5em] rounded-full p-[.1em] overflow-hidden ${theme === 'dark' ? 'bg-pink' : 'bg-aqua'} ${props.className}`}>
             <label
                 htmlFor="image"
-                className="absolute top-0 left-0 bg-tr-gray text-white h-full w-full rounded-full flex items-center justify-center cursor-pointer opacity-0 transition-opacity duration-300 ease-in-out hover:opacity-100 hover:z-50"
+                className="absolute top-0 left-0 bg-tr-gray text-white h-full w-full rounded-full flex items-center justify-center cursor-pointer opacity-0 transition-opacity duration-300 ease-in-out hover:opacity-100 hover:z-[99]"
             >
-                <Icon icon="bx:image-add" className="text-[3em]" />
+                <Icon icon="bx:image-add" className="text-[100%]" />
                 <input
                     type="file"
                     id="image"
                     accept="image/*"
                     onChange={handleImageChange}
-                    style={{ display: 'none' }}
+                    className='hidden'
                 />
             </label>
             <img
                 src={randomImage || user?.photo || generateRandomImage()}
                 alt={`${user?.username} profile picture`}
-                className='relative h-full w-full rounded-full'
+                className='relative h-full w-full rounded-full z-0'
             />
         </div>
     );

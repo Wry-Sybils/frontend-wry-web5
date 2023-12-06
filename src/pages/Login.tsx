@@ -45,7 +45,7 @@ export default function Login() {
           ariaLabel="DID Input"
           disabled
           disabledClassLight="cursor-not-allowed pointer-none text-tr-gray"
-          disabledClassDark="cursor-not-allowed pointer-none text-dk-white"
+          disabledClassDark="cursor-not-allowed pointer-none text-tr-white"
         />
 
           <FormInput

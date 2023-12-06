@@ -34,7 +34,7 @@ export default function Background() {
           ></feGaussianBlur>
         </filter>
       </defs>
-      <g filter="url(#bbblurry-filter)">
+      <g filter="url(#bbblurry-filter)" className="w-full h-full">
         <ellipse
           rx="131.5"
           ry="131.5"

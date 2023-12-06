@@ -15,6 +15,7 @@ export default function GenerateDID() {
   const [getDID, setGetDID] = useState(false);
   const [generateCode, setGenerateCode] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [countdown, setCountdown] = useState(30);
   const { user, setUser } = useUser();
 
   useEffect(() => {
@@ -23,18 +24,27 @@ export default function GenerateDID() {
       setGenerateCode(storedCode);
       setGetDID(true);
 
-      // Schedule code removal after 30 seconds
+      // Schedule code removal and countdown after 30 seconds
+      const countdownInterval = setInterval(() => {
+        setCountdown((prevCountdown) => prevCountdown - 1);
+      }, 1000);
+
       const timeoutId = setTimeout(() => {
         localStorage.removeItem('generatedCode');
         setGenerateCode('');
         setGetDID(false);
+        clearInterval(countdownInterval); // Clear interval when countdown is complete
       }, 30000);
 
       // Cleanup on component unmount
       return () => {
+        clearInterval(countdownInterval);
         clearTimeout(timeoutId);
         setIsLoading(false); // Reset loading state on unmount
       };
+    } else {
+      // If no stored code, make sure getDID is set to false
+      setGetDID(false);
     }
   }, []);
 
@@ -42,23 +52,41 @@ export default function GenerateDID() {
     setIsLoading(true);
 
     setTimeout(() => {
-        const code = generateRandomCode(24);
-        setGenerateCode(code);
-        localStorage.setItem('generatedCode', code);
+      const code = generateRandomCode(24);
+      setGenerateCode(code);
+      localStorage.setItem('generatedCode', code);
 
-        // Update user's data in local storage and context
-        const storedImage = localStorage.getItem('userImage');
-        const updatedUser = {
-            DID: code,
-            username: user?.username || undefined,
-            photo: storedImage || undefined,
-        };
+      // Update user's data in local storage and context
+      const storedImage = localStorage.getItem('userImage');
+      const updatedUser = {
+        DID: code,
+        username: user?.username || undefined,
+        photo: storedImage || undefined,
+      };
 
-        setUser(updatedUser);
+      setUser(updatedUser);
 
-        setGetDID(true);
-        navigate(`${url}/code generated/${code}`);
-        setIsLoading(false);
+      setGetDID(true);
+      navigate(`${url}/code generated/${code}`);
+      setIsLoading(false);
+
+      // Schedule code removal and countdown after 30 seconds
+      const countdownInterval = setInterval(() => {
+        setCountdown((prevCountdown) => prevCountdown - 1);
+      }, 1000);
+
+      const timeoutId = setTimeout(() => {
+        localStorage.removeItem('generatedCode');
+        setGenerateCode('');
+        setGetDID(false);
+        clearInterval(countdownInterval); // Clear interval when countdown is complete
+      }, 30000);
+
+      // Cleanup the previous timeout on new code generation
+      return () => {
+        clearInterval(countdownInterval);
+        clearTimeout(timeoutId);
+      };
     }, 3000);
   }
 
@@ -108,7 +136,7 @@ export default function GenerateDID() {
               <Icon icon='iconoir:copy' />
             </ToggleButton>
           </span>
-          <small>Generate new code in </small>
+          <small>Generate new code in {countdown}s </small>
 
           <ToggleButton
             type='button'
@@ -131,9 +159,9 @@ export default function GenerateDID() {
             addLight='bg-aqua'
             onClick={getCode}
             disabled={isLoading}
-            disabledClass='bg-gray text-white'
+            disabledClass='bg-gray text-white cursor-not-allowed'
             >
-                {isLoading && <Icon icon="tabler:loader-3" className='animate-spin text-3xl cursor-not-allowed' />}
+                {isLoading && <Icon icon="tabler:loader-3" className='animate-spin text-3xl' />}
             </ToggleButton>
         )}
 
