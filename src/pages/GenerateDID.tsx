@@ -154,12 +154,13 @@ export default function GenerateDID() {
             type='button'
             title={isLoading ? '' : 'GENERATE'}
             ariaLabel='generate DID'
-            className='relative font-taruno rounded-lg w-[15%] flex items-center justify-center'
+            className='relative font-taruno rounded-lg w-[12em] flex items-center justify-center'
             addDark='bg-pink text-white'
             addLight='bg-aqua'
             onClick={getCode}
             disabled={isLoading}
-            disabledClass='bg-gray text-white cursor-not-allowed'
+            // disabledClass='bg-gray text-white cursor-not-allowed'
+            disabledClass='bg-gray text-white'
             >
                 {isLoading && <Icon icon="tabler:loader-3" className='animate-spin text-3xl' />}
             </ToggleButton>
