@@ -24,6 +24,8 @@ export default function Dashboard() {
         data: <YourData />,
     };
 
+    const borderColor = theme === 'dark' ? (id === 'data' ? 'border-aqua' : 'border-pink') : 'border-gray';
+
     const handleExpand = () => {
         setExpand(!expand)
     }
@@ -58,7 +60,7 @@ export default function Dashboard() {
                         {!expand ? <Icon icon="fa6-solid:outdent" /> : <Icon icon="fa6-solid:indent" />}
                     </ToggleButton>
                 </header>
-                <section className={`h-[80%] rounded-lg mt-[3%] mx-10 p-4 z-40 border ${theme === 'dark' ? 'border-pink' : 'border-gray'}`}>
+                <section className={`h-[80%] rounded-lg mt-[3%] mx-10 p-4 z-40 border ${theme === 'dark' ? borderColor : 'border-gray'}`}>
                     {contentRender[id ?? 'apps'] || <ConnectApp />}
                 </section>
 

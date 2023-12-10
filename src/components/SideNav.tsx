@@ -38,18 +38,18 @@ export default function SideNav({ activeBar, setActiveBar, expand }: Props) {
 
     return (
         <menu role="menu" 
-            className={`oveflow-hidden h-full font-taruno border-r transition-all duration-500
+            className={`oveflow-hidden h-full font-taruno border-r transition-all duration-300
                 ${theme === 'dark' ? 'bg-black border-r-tr-white' : 'bg-dk-white border-r-tr-gray'}
                 ${expand ? 'w-0' : 'w-[28%]'}
             `}
         >
-            <header className={`overflow-hidden border-b border-b-tr-white py-4 m-4 transition-opacity duration-500`}>
+            <header className={`overflow-hidden border-b border-b-tr-white py-4 m-4 transition-opacity duration-300`}>
                 <h3 className={`text-[12px] text-center  ${theme === 'dark' ? '' : ''}`}>
                     Hello <span className={theme === 'dark' ? 'text-gold' : 'text-white text-fill'}>{user?.username}</span>
                 </h3>
             </header>
 
-            <section className={`overflow-hidden relative w-full mt-16 px-6 flex flex-col items-start gap-5 transition-transform duration-500 ${expand ? '-translate-x-[100%]' : 'translate-x-0'}`}>
+            <section className={`overflow-hidden relative w-full mt-16 px-6 flex flex-col items-start gap-5 transition-transform duration-300 ${expand ? '-translate-x-[100%]' : 'translate-x-0'}`}>
                 {sideBarItems.map((items, index) => (
                     <ToggleButton
                         type="button"
@@ -57,7 +57,7 @@ export default function SideNav({ activeBar, setActiveBar, expand }: Props) {
                         title={items.title}
                         ariaLabel={items.title}
                         className="w-full !text-[.7em] gap-4 rounded-lg"
-                        addDark="hover:bg-pink"
+                        addDark="hover:bg-tr-pink"
                         addLight="hover:bg-gray hover:text-white"
                         onClick={() => {
                             startTransition(() => {
