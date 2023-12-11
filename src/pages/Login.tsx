@@ -44,6 +44,7 @@ export default function Login() {
           onChange={() => user?.DID || ''}
           ariaLabel="DID Input"
           disabled
+          required
           disabledClassLight="cursor-not-allowed pointer-none text-tr-gray"
           disabledClassDark="cursor-not-allowed pointer-none text-tr-white"
         />
@@ -54,6 +55,7 @@ export default function Login() {
             title={'Your UserName'}
             value={user?.username || ''}
             onChange={handleUsernameChange}
+            required
             ariaLabel="Input Username"
           />
 

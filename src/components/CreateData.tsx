@@ -3,6 +3,8 @@ import { useTheme } from '../context/ThemeContext';
 import FormInput from './FormInput';
 import { useCreateData } from '../context/CreateDataContext';
 import ToggleButton from './ToggleButton';
+import { useState } from 'react';
+import { nanoid } from 'nanoid/non-secure';
 
 type CreateDataProps ={
     modal: boolean;
@@ -11,27 +13,25 @@ type CreateDataProps ={
 
 export default function CreateData(props:CreateDataProps) {
     const { theme } = useTheme();
-    const { data, setData } = useCreateData();
-
-    const handlePrivacyChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const isPrivate = e.target.value === 'private';
-        setData({ ...data, privacy: isPrivate, title: data?.title || '', description:data?.description || '' });
-    };
-
-    function handleTitleChange(e: React.ChangeEvent<HTMLInputElement>) {
-        const newTitle = e.target.value;
-        setData({...data, privacy: data?.privacy || false, title: newTitle || '', description: data?.description || ''})
-    }
-    function handleDescriptionChange(e: React.ChangeEvent<HTMLInputElement>) {
-        const newDescription = e.target.value;
-        setData({...data, privacy: data?.privacy || false, title: data?.title || '', description: newDescription || ''})
-    }
+    const { createData } = useCreateData();
+    const [formState, setFormState] = useState({
+        id: nanoid(),
+        title: '',
+        description: '',
+        privacy: false,
+    })
+    
 
     const handleFormSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
         e.preventDefault();
-        
-        setData(data);
-        console.log(data)
+        createData(formState);
+        console.log(formState)
+        setFormState({
+            id: '',
+            title: '',
+            description: '',
+            privacy: false,
+        })
         props.toggleModal(!props.modal);
     }
 
@@ -44,48 +44,42 @@ export default function CreateData(props:CreateDataProps) {
             </h1>
         </header>
 
+
+
         <form action="" className='w-100%' onSubmit={handleFormSubmit}>
             <FormInput
                 type='text'
-                id={data?.title || ''}
+                id={formState.title}
                 title='Title'
-                value={data?.title || ''}
+                value={formState.title}
                 ariaLabel='Title'
-                onChange={handleTitleChange}
+                required
+                onChange={(e) => setFormState({...formState, title: e.target.value})}
             />
             
             <FormInput
                 type='text'
-                id={data?.description || ''}
+                id={formState.description}
                 title='Description'
-                value={data?.description || ''}
+                value={formState.description}
                 ariaLabel='Description'
-                onChange={handleDescriptionChange}
+                required
+                onChange={(e) => setFormState({...formState, description: e.target.value})}
             />
 
             <FormInput
-                type='radio'
+                type='checkbox'
                 id='privacy'
-                title='Public'
-                value='public'
-                checked={!data?.privacy}
-                onChange={handlePrivacyChange}
-                ariaLabel='public'
-                className='!flex-row-reverse items-center !text-sm gap-2 !justify-start !w-max mt-4 cursor-pointer'
-                inputClass={`h-4 w-4 cursor-poiner ${theme === 'dark' ? 'accent-pink bg-gray' : 'accent-gray'}`}
-            />
-
-            <FormInput
-                type='radio'
-                id='privacy'
-                title='Private'
-                value='private'
-                checked={data?.privacy}
-                onChange={handlePrivacyChange}
+                title='Set private'
+                checked={formState.privacy}
+                required={false}
+                value={'privacy'}
+                onChange={() => setFormState({ ...formState, privacy: !formState.privacy })}
                 ariaLabel='private'
-                className='!flex-row-reverse items-center !text-sm gap-2 !justify-start !w-max cursor-pointer'
+                className='!flex-row-reverse items-center !text-xs gap-2 !justify-start !w-max mt-4 cursor-pointer'
                 inputClass={`h-4 w-4 cursor-poiner ${theme === 'dark' ? 'accent-pink bg-gray' : 'accent-gray'}`}
             />
+
 
             <ToggleButton
                 type='submit'
