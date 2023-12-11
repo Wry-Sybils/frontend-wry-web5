@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useTheme } from "../context/ThemeContext";
 import ToggleButton from "./ToggleButton";
 import Modal from "../utils/Modal";
+import CreateData from "./CreateData";
 
 export default function YourData() {
   const { theme } = useTheme();
@@ -14,7 +15,7 @@ export default function YourData() {
 
   return (
     <main role="main">
-      <header className={`relative w-full py-3 px-2 flex items-center border-b border-b-tr-white ${theme === 'dark' ? '' : 'border-b-tr-gray'}`}>
+      <header className={`relative w-full py-3 px-2 flex items-center border-b border-b-tr-white ${theme === 'dark' ? '' : 'border-b-tr-black'}`}>
         <h1 className={`relative font-taruno ${theme === 'dark' ? 'text-pink' : 'text-black'}`}>
           MY DATA
         </h1>
@@ -43,11 +44,18 @@ export default function YourData() {
               ariaLabel="Create Data Button"
               className="rounded-md w-[15em] self-center justify-center"
               addDark="bg-pink"
+              addLight="bg-gray text-white"
             />
           </ div>
         )}
       </section>
-      <Modal open={open} setOpen={handleModalOpen} />
+      <Modal 
+        open={open} 
+        setOpen={handleModalOpen}
+        children={
+          <CreateData modal={open} toggleModal={handleModalOpen} />
+        }
+      />
     </main>
   )
 }

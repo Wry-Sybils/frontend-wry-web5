@@ -24,7 +24,7 @@ export default function Login() {
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    console.log(user)
+    // console.log(user)
 
     navigate(`/dashboard/`)
   }

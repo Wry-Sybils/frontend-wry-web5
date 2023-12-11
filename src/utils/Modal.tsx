@@ -26,7 +26,7 @@ export default function Modal(props:ModalProps) {
             }
             className="absolute top-5 right-5"
             addDark="text-white"
-            addLight="text-gray"
+            addLight="text-white"
         />
         {props.children}
     </main>

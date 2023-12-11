@@ -1,8 +1,8 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
 interface DataProps {
-    title: string;
-    description: string;
+    title: string | undefined;
+    description: string | undefined;
     privacy: boolean;
 }
 
