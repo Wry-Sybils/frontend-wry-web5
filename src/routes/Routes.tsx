@@ -26,15 +26,19 @@ export default function RouterContent() {
             element: <Dashboard />,
             children: [
                 {
-                    path: '/dashboard/:id',
+                    path: ':id',
                 },
                 {
                     path: '/dashboard/',
-                    element: <ConnectApp />
                 },
                 {
                     path: '/dashboard/',
-                    element: <YourData />
+                    element: <YourData />,
+                    children: [
+                        {
+                            path: ':id'
+                        }
+                    ]
                 }
             ]
         },

@@ -1,14 +1,16 @@
-import { useState } from 'react';
+import { useState, startTransition } from 'react';
 import { Icon } from "@iconify/react";
 import { useCreateData } from "../context/CreateDataContext";
 import { useTheme } from "../context/ThemeContext";
 import { useUser } from "../context/UserContext";
 import ToggleButton from "./ToggleButton";
+import { Outlet, useNavigate } from 'react-router-dom';
 
 export default function ViewData() {
   const { theme } = useTheme();
   const { data, deleteData } = useCreateData();
   const { user } = useUser();
+  const navigate = useNavigate();
   const [hoveredItemId, setHoveredItemId] = useState<string | null>(null);
 
   function handleDelete(id: string) {
@@ -26,10 +28,15 @@ export default function ViewData() {
           `}
           onMouseEnter={() => setHoveredItemId(items.id)}
           onMouseLeave={() => setHoveredItemId(null)}
+          onClick={() => {
+            startTransition(() => {
+              navigate(`data/${items.id}`)
+            })
+          }}
         >
 
           <img src={user?.photo} alt={`${user?.username}'s ${items.title}`} className="rounded-full w-24 h-24" />
-          <h4>
+          <h4 className='relative uppercase font-semibold font-2xl font-taruno'>
             {items.title}
           </h4>
 
@@ -47,6 +54,8 @@ export default function ViewData() {
 
         </section>
       ))}
+
+      <Outlet />
     </main>
   );
 }

@@ -76,7 +76,7 @@ export default function CreateData(props:CreateDataProps) {
                 value={'privacy'}
                 onChange={() => setFormState({ ...formState, privacy: !formState.privacy })}
                 ariaLabel='private'
-                className='!flex-row-reverse items-center !text-xs gap-2 !justify-start !w-max mt-4 cursor-pointer'
+                className='!flex-row-reverse items-center !w-full gap-2 !justify-end mt-4 cursor-pointer ml-auto'
                 inputClass={`h-4 w-4 cursor-poiner ${theme === 'dark' ? 'accent-pink bg-gray' : 'accent-gray'}`}
             />
 
@@ -85,7 +85,7 @@ export default function CreateData(props:CreateDataProps) {
                 type='submit'
                 title='CREATE'
                 ariaLabel='CREATE DATA'
-                className='font-taruno mt-12 items-center self-center justify-center'
+                className='font-taruno mt-12 items-center justify-center rounded-lg'
                 addDark='bg-pink'
                 addLight='bg-gray text-white'
             />
