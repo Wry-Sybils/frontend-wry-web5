@@ -13,7 +13,10 @@ export default function ConnectApp() {
 
   return (
     <main role="main" className={`relative w-full h-full`}>
-      <header className={`relative w-full py-3 flex-1 border-b border-b-tr-white ${theme === 'dark' ? '' : 'border-b-tr-gray'}`}>
+      <header className={`relative w-full py-3 px-2 flex items-center border-b border-b-tr-white ${theme === 'dark' ? '' : 'border-b-tr-gray'}`}>
+      <h1 className={`relative font-taruno ${theme === 'dark' ? 'text-aqua' : 'text-black'}`}>
+        My APPS
+      </h1>
         <ToggleButton
           type="button"
           title="Connect App"

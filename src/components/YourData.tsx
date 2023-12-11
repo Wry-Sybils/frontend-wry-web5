@@ -1,8 +1,17 @@
+import { useState } from "react";
 import { useTheme } from "../context/ThemeContext";
 import ToggleButton from "./ToggleButton";
+import Modal from "../utils/Modal";
 
 export default function YourData() {
   const { theme } = useTheme();
+  const [isSeen, setIsSeen] = useState();
+  const [open, setOpen] = useState(false);
+
+  const handleModalOpen = () => {
+    setOpen(!open);
+  }
+
   return (
     <main role="main">
       <header className={`relative w-full py-3 px-2 flex items-center border-b border-b-tr-white ${theme === 'dark' ? '' : 'border-b-tr-gray'}`}>
@@ -20,8 +29,25 @@ export default function YourData() {
       </header>
 
       <section>
-        {/*This place contains the place where data created would be stored and seen*/}
+        {isSeen ?(
+          <></>
+        ): (
+          <div className="w-full h-full flex flex-col gap-5 items-center justify-center p-4">
+            <p className={theme === 'dark' ? 'text-dk-white' : 'text-tr-gray'}>
+              <i>There is no data yet</i>
+            </p>
+            <ToggleButton
+              type="button"
+              title="Create Data"
+              onClick={handleModalOpen}
+              ariaLabel="Create Data Button"
+              className="rounded-md w-[15em] self-center justify-center"
+              addDark="bg-pink"
+            />
+          </ div>
+        )}
       </section>
+      <Modal open={open} setOpen={handleModalOpen} />
     </main>
   )
 }
