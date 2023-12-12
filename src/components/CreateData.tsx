@@ -78,6 +78,7 @@ export default function CreateData(props:CreateDataProps) {
                 ariaLabel='private'
                 className='!flex-row-reverse items-center !w-full gap-2 !justify-end mt-4 cursor-pointer ml-auto'
                 inputClass={`h-4 w-4 cursor-poiner ${theme === 'dark' ? 'accent-pink bg-gray' : 'accent-gray'}`}
+                labelClass="text-sm"
             />
 
 

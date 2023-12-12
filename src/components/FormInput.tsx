@@ -23,6 +23,7 @@ type FormInputTypes = {
   ariaLabel: string
   checked?: boolean
   required: boolean
+  labelClass?: string
 }
 
 export default function FormInput(props: FormInputTypes) {
@@ -51,8 +52,9 @@ export default function FormInput(props: FormInputTypes) {
   return (
     <span id='form-input' className={`relative w-full flex flex-col items-start gap-1 bg-transparent rounded-small ${props.className}`}>
       <label htmlFor={props.id} className={`relative text-2xl text-sac-black 
-        ${formState[props.id] ? 'active' : ''} font-['Inter var']
+        ${formState[props.id] ? 'active' : ''} font-gilroy
         ${theme === 'dark' ? 'text-white' : 'text-black'}
+        ${props.labelClass}
       `}>
         {props.title}
       </label>
@@ -72,7 +74,7 @@ export default function FormInput(props: FormInputTypes) {
         title={props.message}
         required={props.required}
         placeholder={props.placeholder}
-        className={`relative w-full h-10 bg-transparent outline-none resize-none border rounded py-1 px-4 overflow-hidden text-black font-gilroy 
+        className={`relative w-full h-10 bg-transparent outline-none resize-none border rounded py-1 px-4 overflow-hidden textbase font-gilroy 
           ${theme === 'dark' ? 'focus-within:border-pink border-dk-white bg-tr-gray text-white' : 'focus-within:border-aqua border-gray bg-tr-white text-gray'}
           ${props.inputClass}
           ${props.disabled && theme === 'dark' ? props.disabledClassDark : props.disabledClassLight}

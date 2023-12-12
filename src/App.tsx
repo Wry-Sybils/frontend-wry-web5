@@ -9,7 +9,7 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <div>
+      <div className='font-gilroy'>
         <RouterContent />
       </div>
     </QueryClientProvider>

@@ -4,7 +4,7 @@ import { useCreateData } from "../context/CreateDataContext";
 import { useTheme } from "../context/ThemeContext";
 import { useUser } from "../context/UserContext";
 import ToggleButton from "./ToggleButton";
-import { Outlet, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export default function ViewData() {
   const { theme } = useTheme();
@@ -14,7 +14,7 @@ export default function ViewData() {
   const [hoveredItemId, setHoveredItemId] = useState<string | null>(null);
 
   function handleDelete(id: string) {
-    deleteData(id);
+    deleteData(id); 
   }
 
   return (
@@ -54,8 +54,6 @@ export default function ViewData() {
 
         </section>
       ))}
-
-      <Outlet />
     </main>
   );
 }

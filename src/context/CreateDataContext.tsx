@@ -1,14 +1,14 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { nanoid } from 'nanoid';
 
-interface DataProps {
+export interface DataProps {
     id: string;
     title: string | undefined;
     description: string | undefined;
     privacy: boolean;
 }
 
-interface CreateDataContextValue {
+export interface CreateDataContextValue {
     data: DataProps[];
     createData: (newData: DataProps) => void;
     updateData: (id: string, updatedData: DataProps) => void;

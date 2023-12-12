@@ -1,7 +1,7 @@
 import { Icon } from "@iconify/react";
 import { useTheme } from "../context/ThemeContext";
 import { useUser } from "../context/UserContext";
-import { NavigateFunction, Outlet, useNavigate } from "react-router-dom";
+import { NavigateFunction, useNavigate } from "react-router-dom";
 import ToggleButton from "./ToggleButton";
 import { startTransition, useEffect } from "react";
 
@@ -75,8 +75,6 @@ export default function SideNav({ activeBar, setActiveBar, expand }: Props) {
                     </ToggleButton>
                 ))}
             </section>
-
-            <Outlet />
         </menu>
     );
 }
