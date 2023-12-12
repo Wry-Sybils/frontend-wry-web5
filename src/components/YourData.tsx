@@ -24,7 +24,7 @@ export default function YourData() {
           <DataContent />
         ) : (
         <>
-          <header className={`relative w-full py-3 px-2 flex items-center border-b border-b-tr-white ${theme === 'dark' ? '' : 'border-b-tr-black'}`}>
+          <header className={`relative w-full py-3 px-2 flex items-center border-b border-b-tr-white ${theme === 'dark' ? '' : 'border-b-black'}`}>
               <h1 className={`relative font-taruno ${theme === 'dark' ? 'text-pink' : 'text-black'}`}>
                   MY DATA
               </h1>

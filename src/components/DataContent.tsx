@@ -5,11 +5,13 @@ import { useTheme } from "../context/ThemeContext";
 import FormInput from "./FormInput";
 import ToggleButton from "./ToggleButton";
 import Modal from '../utils/Modal';
+import { useNavigate } from 'react-router-dom';
 
 export default function DataContent() {
   const { data, setData } = useCreateData();
   const {theme} = useTheme();
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
 
   const urlParts = window.location.pathname.split('/');
   const selectedId = urlParts[urlParts.length - 1];
@@ -45,9 +47,21 @@ export default function DataContent() {
           ariaLabel="set privacy"
           onChange={() => setData(data.map(item => item.id === selectedId ? {...item, privacy: !item.privacy} : item))}
           required={false}
-          className='!flex-row-reverse items-center !w-full gap-2 cursor-pointer'
+          className='!flex-row-reverse items-center !w-max gap-2 cursor-pointer'
           inputClass={`h-4 w-4 cursor-poiner ${theme === 'dark' ? 'accent-pink bg-gray' : 'accent-gray'}`}
           labelClass="text-sm"
+        />
+
+        <ToggleButton
+          type='button'
+          ariaLabel='go back a step'
+          onClick={() => navigate(-1)}
+          children={
+            <Icon icon="ooui:arrow-previous-ltr" className='text-3xl' />
+          }
+          className='rounded-full py-1.5 ml-2 border'
+          addDark='bg-gray text-pink border-pink'
+          addLight='bg-black text-white border-dk-white'
         />
       </header>
 
