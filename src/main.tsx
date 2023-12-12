@@ -5,13 +5,16 @@ import './index.css'
 import { ThemeProvider } from './context/ThemeContext.tsx'
 import { UserProvider } from './context/UserContext.tsx'
 import { CreateDataProvider } from './context/CreateDataContext.tsx'
+import { DataContentProvider } from './context/DataContentContext.tsx'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <ThemeProvider>
       <UserProvider>
         <CreateDataProvider>
-          <App />
+          <DataContentProvider>
+            <App />
+          </DataContentProvider>
         </CreateDataProvider>
       </UserProvider>
     </ThemeProvider>

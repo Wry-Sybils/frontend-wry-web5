@@ -22,7 +22,7 @@ type FormInputTypes = {
   inputClass?: string
   ariaLabel: string
   checked?: boolean
-  required: boolean
+  required?: boolean
   labelClass?: string
 }
 
@@ -51,7 +51,7 @@ export default function FormInput(props: FormInputTypes) {
   
   return (
     <span id='form-input' className={`relative w-full flex flex-col items-start gap-1 bg-transparent rounded-small ${props.className}`}>
-      <label htmlFor={props.id} className={`relative text-2xl text-sac-black 
+      <label htmlFor={props.id} className={`relative text-base text-sac-black 
         ${formState[props.id] ? 'active' : ''} font-gilroy
         ${theme === 'dark' ? 'text-white' : 'text-black'}
         ${props.labelClass}

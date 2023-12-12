@@ -6,6 +6,7 @@ import FormInput from "./FormInput";
 import ToggleButton from "./ToggleButton";
 import Modal from '../utils/Modal';
 import { useNavigate } from 'react-router-dom';
+import CreateDataContent from './CreateDataContent';
 
 export default function DataContent() {
   const { data, setData } = useCreateData();
@@ -54,14 +55,14 @@ export default function DataContent() {
 
         <ToggleButton
           type='button'
-          ariaLabel='go back a step'
+          ariaLabel='previous'
           onClick={() => navigate(-1)}
           children={
             <Icon icon="ooui:arrow-previous-ltr" className='text-3xl' />
           }
-          className='rounded-full py-1.5 ml-2 border'
-          addDark='bg-gray text-pink border-pink'
-          addLight='bg-black text-white border-dk-white'
+          className='rounded-full py-1.5 ml-2 border transition-colors'
+          addDark='bg-gray text-pink border-pink hover:bg-black'
+          addLight='bg-black text-white border-dk-white hover:bg-white hover:text-black'
         />
       </header>
 
@@ -73,7 +74,7 @@ export default function DataContent() {
             <Icon icon="fluent:tab-new-24-filled" className="text-8xl" />
           }
           ariaLabel="ADD DATA"
-          className="border-2 border-dashed rounded-lg flex-col p-6 font-taruno text-sm"
+          className="border-2 border-dashed rounded-lg flex-col p-6 font-taruno text-sm gap-6"
           addDark="hover:bg-tr-black border-dk-white"
           addLight="hover:bg-tr-gray border-gray"
           onClick={handleModalOpen}
@@ -83,6 +84,9 @@ export default function DataContent() {
       <Modal
         open={open}
         setOpen={handleModalOpen}
+        children={
+          <CreateDataContent />
+        }
       />
     </section>
   );

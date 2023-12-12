@@ -64,7 +64,7 @@ export default function YourData() {
               open={open}
               setOpen={handleModalOpen}
               children={
-                  <CreateData modal={open} toggleModal={handleModalOpen} />
+                <CreateData modal={open} toggleModal={handleModalOpen} />
               }
           />
           <Outlet />

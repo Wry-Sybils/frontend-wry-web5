@@ -43,5 +43,7 @@ export default {
     }
   },
   darkMode: "class",
-  plugins: [],
+  plugins: [
+    require('tailwind-scrollbar')({ nocompatible: true }),
+  ],
 }
