@@ -41,7 +41,7 @@ export default function ViewDataContent() {
 
   return (
     <>
-      {dataContent.map((item) => (
+      {Array.isArray(dataContent) && dataContent.map((item) => (
         <section
           key={item.id}
           className={`relative h-[12em] max-w-[10em] basis-[10em] grow overflow-hidden flex flex-col items-center justify-center gap-3 cursor-pointer text-center rounded-lg transition-colors

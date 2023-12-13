@@ -22,37 +22,37 @@ const DataContentContext = createContext<DataContentContextValue | undefined>(un
 
 export const DataContentProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [dataContent, setDataContents] = useState<DataContentProps[]>(() => {
-        const storedData = localStorage.getItem('createdDataContent');
-        return storedData ? JSON.parse(storedData) : [];
+      const storedData = localStorage.getItem('createdDataContent');
+      return storedData ? JSON.parse(storedData) : [];
     });
 
     const createDataContent = (newDataContent: DataContentProps) => {
-        setDataContents((prevDataContents) => [
-        ...prevDataContents,
-        { ...newDataContent, id: nanoid() },
-        ]);
+      setDataContents((prevDataContents) => [
+      ...prevDataContents,
+      { ...newDataContent, id: nanoid() },
+      ]);
     };
 
     const updateDataContent = (id: string, updatedDataContent: DataContentProps) => {
-        setDataContents((prevDataContents) =>
-        prevDataContents.map((content) =>
-            content.id === id ? { ...content, ...updatedDataContent } : content
-        )
-        );
+      setDataContents((prevDataContents) =>
+      prevDataContents.map((content) =>
+          content.id === id ? { ...content, ...updatedDataContent } : content
+      )
+      );
     };
 
     const deleteDataContent = (id: string) => {
-        setDataContents((prevDataContents) =>
-        prevDataContents.filter((content) => content.id !== id)
-        );
+      setDataContents((prevDataContents) =>
+      prevDataContents.filter((content) => content.id !== id)
+      );
     };
 
     useEffect(() => {
-        if (dataContent) {
-            localStorage.setItem('createdDataContent', JSON.stringify(dataContent));
-        } else {
-            localStorage.removeItem('createdDataContent');
-        }
+      if (dataContent) {
+        localStorage.setItem('createdDataContent', JSON.stringify(dataContent));
+      } else {
+        localStorage.removeItem('createdDataContent');
+      }
     }, [dataContent]);
 
   return (
