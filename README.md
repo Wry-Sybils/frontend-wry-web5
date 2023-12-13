@@ -1,30 +1,56 @@
-# React + TypeScript + Vite
+# WRY SYBILS WEB-5 APP
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the application for the web-5 solution challange.
 
-Currently, two official plugins are available:
+[](/public/images/placeholder.png)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+[Live Link](https://wry-sybils.onrender.com/)
 
-## Expanding the ESLint configuration
+## Table of Contents
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- [Overview](#overview)
+    - [The Challenge](#the_challenge)
+- [The Process](#the-process)
+    - [Built With](#built-with)
+    - [Dependencies](#dependencies)
+- [The Team](#the-team)
 
-- Configure the top-level `parserOptions` property like this:
+## Overview
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+This application aims to bridge the gap between web2 and web3, by using the familiar interaction of web2, and the decentralised nature of web3 to be able to seamlessly transfer data from one point to another.
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+This application aims to bridge that gap by by providing a unique DWN to each user, which is then the user's decentralised ID for communication through out all websites which support the web5 characteristics.
+
+## The Challenge
+
+The core thing faced in this was seamlessly linking the application to be able to interact will all applications in the web5 chain, by ensuring that data stored could be shared seamlessly between platforms which could use said data.
+
+## The Process
+
+It involved us linking the backend with the DWN provider, and createing an API from it which we would use to then link throughout the application.
+Then, using `tanstack/react-query` with `axios`, we would then query the parametes, and ensure proper communication with the backend.
+
+## Built With
+
+The application was built with;
+
+<p align="left">
+<a href="https://www.typescriptlang.org/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/typescript-colored.svg" width="36" height="36" alt="TypeScript" /></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/javascript-colored.svg" width="36" height="36" alt="JavaScript" /></a><a href="https://vitejs.dev/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/vite-colored.svg" width="36" height="36" alt="Vite" /></a><a href="https://tailwindcss.com/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/tailwindcss-colored.svg" width="36" height="36" alt="TailwindCSS" /></a><a href="https://render.com/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/render-colored.svg" width="36" height="36" alt="Render" /></a>
+</p>
+
+## Dependencies
+- Tanstack react-query
+- Axios
+- Sonner
+- Tailwind CSS
+- Iconify
+- Vite
+
+## The Team
+
+- [Nancy Amandi](https://github.com/Nancy9ice) Product Manager
+- [Ayo Solomon](https://github.com/Ayoseun) Backend developer
+- [Chibuzo Odigbo](https://github.com/Franklivania) Frontend Developer
+
+
+_Thanks for viewing. Hope you enjoy the product._
