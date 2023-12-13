@@ -3,16 +3,40 @@ import { Icon } from "@iconify/react/dist/iconify.js";
 import { useTheme } from "../context/ThemeContext";
 import FormInput from "./FormInput";
 import ToggleButton from "./ToggleButton";
+import { useDataContent } from "../context/DataContentContext";
+import { nanoid } from "nanoid";
 
-export default function CreateDataContent() {
+type CreateDataProps ={
+    modal: boolean;
+    toggleModal: (modal: boolean) => void
+}
+
+export default function CreateDataContent(props:CreateDataProps) {
     const { theme } = useTheme();
+    const { createDataContent } = useDataContent();
     const [formState, setFormstate] = useState({
+        id: nanoid(),
         title: '',
         description:'',
-        file: '',
+        file: new File([], 'filename'),
         link: '',
-        data: '',
+        otherText: '',
     })
+
+    function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+        e.preventDefault();
+        createDataContent(formState);
+        setFormstate({
+            id: '',
+            title: '',
+            description:'',
+            file: new File([], 'filename'),
+            link: '',
+            otherText: '',
+        })
+
+        props.toggleModal(!props.modal);
+    }
 
   return (
     <main role="form" className={`w-[50%] h-[80%] overflow-x-hidden scrollbar-thin scrollbar-thumb-rounded-lg max-md:w-[97%] rounded-lg border p-6 ${theme === 'dark' ? 'bg-black border-aqua scrollbar-track-black scrollbar-thumb-dk-white' : 'bg-dk-white border-gray scrollbar-track-dk-white scrollbar-thumb-gray'}`}>
@@ -23,7 +47,7 @@ export default function CreateDataContent() {
             <Icon icon="uil:plus" className={`text-2xl ${theme === 'dark' ? 'text-gold' : 'text-gray'}`} />
         </header>
 
-        <form action="" className={`flex flex-col gap-4`}>
+        <form action="" className={`flex flex-col gap-4`} onSubmit={handleSubmit}>
             <FormInput
                 type="text"
                 id={formState.title}
@@ -49,8 +73,13 @@ export default function CreateDataContent() {
                     <Icon icon="fluent:document-add-28-regular" className={`text-6xl self-center justify-center`} />
                     ADD FILE
                 </label>
-                <input type="file" name="file" id="file" className="hidden" value={formState.file}
-                onChange={(e) => setFormstate({...formState, file: e.target.value})} />
+                <input type="file" name="file" id="file" className="hidden" value=""
+                onChange={(e) => {
+                    const file = e.target.files?.[0];
+                    if (file) {
+                        setFormstate({ ...formState, file: file });
+                    }
+                }}/>
             </span>
 
             <FormInput
@@ -63,8 +92,9 @@ export default function CreateDataContent() {
             />
 
             <span className={`w-full h-32 overflow-hidden border rounded-md flex flex-col gap-1 p-2 font-gilroy`}>
-                <label htmlFor="manualData">Enter Manual Data</label>
-                <textarea name="manualData" id="manualData" className={`w-full h-full overflow-x-hidden font-gilroy outline-none resize-none border-none ${theme === 'dark' ? ' bg-black' : 'bg-dk-white'}`}></textarea>
+                <label htmlFor="otherText">Enter Manual Data</label>
+                <textarea name="otherText" id="otherText" value={formState.otherText} onChange={(e) => setFormstate({...formState, otherText: e.target.value})}
+                className={`w-full h-full overflow-x-hidden font-gilroy outline-none resize-none border-none ${theme === 'dark' ? ' bg-black' : 'bg-dk-white'}`}></textarea>
             </span>
 
             <ToggleButton

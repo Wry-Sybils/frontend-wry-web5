@@ -7,6 +7,7 @@ import ToggleButton from "./ToggleButton";
 import Modal from '../utils/Modal';
 import { useNavigate } from 'react-router-dom';
 import CreateDataContent from './CreateDataContent';
+import ViewDataContent from './ViewDataContent';
 
 export default function DataContent() {
   const { data, setData } = useCreateData();
@@ -28,7 +29,7 @@ export default function DataContent() {
   }
 
   return (
-    <section className="relative w-full h-full">
+    <section className="relative w-full h-full overflow-x-hidden">
       <header className={`w-full py-4 px-2 flex items-center justify-between border-b ${theme === 'dark' ? 'border-b-tr-white' : 'border-b-tr-black'}`}>
         <div className="w-full">
           <h2 className={`uppercase text-2xl font-taruno ${theme === 'dark' ? 'text-pink' : ''}`}>
@@ -66,7 +67,7 @@ export default function DataContent() {
         />
       </header>
 
-      <section className="py-4">
+      <section className="relative py-4 flex flex-wrap items-center max-md:justify-center justify-start gap-3">
         <ToggleButton
           type="button"
           title="ADD NEW"
@@ -79,13 +80,15 @@ export default function DataContent() {
           addLight="hover:bg-tr-gray border-gray"
           onClick={handleModalOpen}
         />
+
+        <ViewDataContent />
       </section>
 
       <Modal
         open={open}
         setOpen={handleModalOpen}
         children={
-          <CreateDataContent />
+          <CreateDataContent modal={open} toggleModal={handleModalOpen} />
         }
       />
     </section>

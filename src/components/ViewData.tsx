@@ -48,7 +48,10 @@ export default function ViewData() {
               }
               ariaLabel="Delete data"
               className="bg-tr-black rounded-full absolute top-2 right-2"
-              onClick={() => handleDelete(items.id)}
+              onClick={(e) => {
+                e.stopPropagation()
+                handleDelete(items.id)
+              }}
             />
           )}
 

@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, ReactNode, useState, useEffect } from 'react';
 import { nanoid } from 'nanoid';
 
 export interface DataContentProps {
@@ -11,8 +11,8 @@ export interface DataContentProps {
 }
 
 export interface DataContentContextValue {
-  dataContent: DataContentProps | null;
-  setDataContent: React.Dispatch<React.SetStateAction<DataContentProps | null>>;
+  dataContent: DataContentProps[];
+  setDataContents: React.Dispatch<React.SetStateAction<DataContentProps[]>>;
   createDataContent: (newDataContent: DataContentProps) => void;
   updateDataContent: (id: string, updatedDataContent: DataContentProps) => void;
   deleteDataContent: (id: string) => void;
@@ -21,26 +21,44 @@ export interface DataContentContextValue {
 const DataContentContext = createContext<DataContentContextValue | undefined>(undefined);
 
 export const DataContentProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [dataContent, setDataContent] = useState<DataContentProps | null>(null);
+    const [dataContent, setDataContents] = useState<DataContentProps[]>(() => {
+        const storedData = localStorage.getItem('createdDataContent');
+        return storedData ? JSON.parse(storedData) : [];
+    });
 
-  const createDataContent = (newDataContent: DataContentProps) => {
-    setDataContent({ ...newDataContent, id: nanoid() });
-  };
+    const createDataContent = (newDataContent: DataContentProps) => {
+        setDataContents((prevDataContents) => [
+        ...prevDataContents,
+        { ...newDataContent, id: nanoid() },
+        ]);
+    };
 
-  const updateDataContent = (id: string, updatedDataContent: DataContentProps) => {
-    if (dataContent && dataContent.id === id) {
-      setDataContent(updatedDataContent);
-    }
-  };
+    const updateDataContent = (id: string, updatedDataContent: DataContentProps) => {
+        setDataContents((prevDataContents) =>
+        prevDataContents.map((content) =>
+            content.id === id ? { ...content, ...updatedDataContent } : content
+        )
+        );
+    };
 
-  const deleteDataContent = (id: string) => {
-    if (dataContent && dataContent.id === id) {
-      setDataContent(null);
-    }
-  };
+    const deleteDataContent = (id: string) => {
+        setDataContents((prevDataContents) =>
+        prevDataContents.filter((content) => content.id !== id)
+        );
+    };
+
+    useEffect(() => {
+        if (dataContent) {
+            localStorage.setItem('createdDataContent', JSON.stringify(dataContent));
+        } else {
+            localStorage.removeItem('createdDataContent');
+        }
+    }, [dataContent]);
 
   return (
-    <DataContentContext.Provider value={{ dataContent, setDataContent, createDataContent, updateDataContent, deleteDataContent }}>
+    <DataContentContext.Provider
+      value={{ dataContent, setDataContents, createDataContent, updateDataContent, deleteDataContent }}
+    >
       {children}
     </DataContentContext.Provider>
   );
