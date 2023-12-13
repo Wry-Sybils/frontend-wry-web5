@@ -2,7 +2,7 @@
 
 This is the application for the web-5 solution challange.
 
-[](/public/images/placeholder.png)
+![](/public/images/placeholder.png)
 
 [Live Link](https://wry-sybils.onrender.com/)
 
